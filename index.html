@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button>Click</button>
+
+  <script>
+
+    function startGame() {
+      console.log('starting')
+    let count=0;
+    document.querySelector('button').addEventListener('click', ()=>{
+      ++count;
+    });
+    // setTimeout(() => {
+    //   if(count>5){
+    //     alert('win, clicks:'+count);
+
+    //   } else {
+    //     alert('lost, clicks:' + count);
+    //   }
+    // }, 2000)
+
+      return new Promise((resolve,reject) => {
+        setTimeout(() => {
+          if(count>5) {
+          resolve(count);
+        } else {
+          reject(count);
+        }
+        }, 2000)
+        
+        
+        
+      });
+      
+
+    }
+
+    startGame().then((count)=>{
+      console.log('win, '+count)
+    }).catch((count)=>{
+      console.log('lost, '+count)
+    });
+    
+  </script>
+</body>
+</html>
