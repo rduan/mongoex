@@ -24,9 +24,15 @@ describe('Read user', () => {
       done();
     });
 
-    
-    
-    // expect()
   });
-  
+
+  it('find user with specific name', (done) => {
+    User.findOne({_id: joe._id}).then((user) => {
+      expect(user.name).to.be.equals('Joeh');
+      done();
+    }
+    )
+    
+  }
+  )
 })
