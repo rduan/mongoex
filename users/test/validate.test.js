@@ -18,4 +18,14 @@ describe('Validating records', () => {
     const {message} = validateResult.errors.name;
     expect(message).to.be.eql('Name longer than 3');
   });
+
+  it('disallow to save invalid record', (done) => {
+    const user = new User({name: 'AI'});
+    user.save().catch((validateResult)=>{
+      const {message} = validateResult.errors.name;
+      expect(message).to.be.eql('Name longer than 3');
+      done();
+    })
+  });
+
 })
