@@ -30,9 +30,7 @@ describe('Read user', () => {
     User.findOne({_id: joe._id}).then((user) => {
       expect(user.name).to.be.equals('Joeh');
       done();
-    }
-    )
-    
-  }
-  )
+    } )
+   
+  })
 })

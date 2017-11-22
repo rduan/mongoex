@@ -49,7 +49,7 @@ describe('Delet a user', () => {
 
   it('class instance find by id remove', (done) => {
     User.remove({name: 'Joe'}).then(()=>{
-      User.findByIdAndRemove({_id: joe._id})
+      User.findByIdAndRemove(joe._id)
     }).then(()=>{
       User.findOne({name: 'Joe'})
     }).then((user)=>{
