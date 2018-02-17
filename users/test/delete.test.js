@@ -1,5 +1,7 @@
-const User = require('../src/user');
+'use strict'
+
 const assert = require('assert');
+const User = require('../src/user');
 const expect = require('chai').expect;
 
 describe('Delet a user', () => {

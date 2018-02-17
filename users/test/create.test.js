@@ -1,3 +1,5 @@
+'use strict'
+
 const User = require('../src/user');
 const assert = require('assert');
 const expect = require('chai').expect;
@@ -12,9 +14,6 @@ describe('Create user', () => {
       // assert(joe.isNew);
       done();
 
-    }).catch((e)=>{
-      // console.log("save error: ",e);
-      done();
     });
       
     

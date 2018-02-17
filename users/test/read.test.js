@@ -1,3 +1,5 @@
+'use strict'
+
 const User = require('../src/user');
 const assert = require('assert');
 const expect = require('chai').expect;

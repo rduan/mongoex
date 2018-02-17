@@ -1,8 +1,10 @@
+'use strict'
+
 const User = require('../src/user');
 const assert = require('assert');
 const expect = require('chai').expect;
 
-describe('Update a user', () => {
+describe.only('Update a user', () => {
 
   let joe;
 
@@ -15,7 +17,7 @@ describe('Update a user', () => {
   function expectName(op,done) {
     op.then(()=> User.find({}))
     .then((users)=>{
-      console.log(users);
+      // console.log(users);
       expect(users.length).to.be.equal(1);
 
       expect(users[0].name).to.be.equal('Alex');
@@ -25,15 +27,7 @@ describe('Update a user', () => {
 
   it('instance update by set and save', (done) => {
     joe.set('name','Alex');
-    // joe.save()
-    //   .then(()=> User.find({}))
-    //   .then((users)=>{
-    //     console.log(users);
-    //     expect(users.length).to.be.equal(1);
-
-    //     expect(users[0].name).to.be.equal('Alex');
-    //     done();
-    // });
+    
     expectName(joe.save(),done);
     
   }  );
