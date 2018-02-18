@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const PostSchema = require('./post');
+
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -11,7 +13,10 @@ const UserSchema = new Schema({
     },
     required: [true, 'name schema required']
   },
-  postCount: Number
+  postCount: Number,
+  posts: [PostSchema]
+}, {
+  usePushEach: true 
 });
 
 const User = mongoose.model('user',UserSchema);

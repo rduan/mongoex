@@ -4,7 +4,7 @@ const User = require('../src/user');
 const assert = require('assert');
 const expect = require('chai').expect;
 
-describe.only('Update a user', () => {
+describe('Update a user', () => {
 
   let joe;
 
@@ -12,17 +12,21 @@ describe.only('Update a user', () => {
     joe = new User({name: 'Joe', postCount: 0});
     joe.save().then(()=>done());
     
-  }  );
+  });
+
+  afterEach((done) => {
+    User.findOneAndRemove({name: 'Joe'}).then(()=>done());
+  });
 
   function expectName(op,done) {
-    op.then(()=> User.find({}))
+    op.then(()=> User.find({})
     .then((users)=>{
       // console.log(users);
       expect(users.length).to.be.equal(1);
 
       expect(users[0].name).to.be.equal('Alex');
       done();
-  });
+  }));
   }
 
   it('instance update by set and save', (done) => {
