@@ -17,10 +17,11 @@ describe('Subdocuments', () => {
   });
 
   afterEach((done) => {
-    User.findOneAndRemove({name: 'Joe'}).then(() => done());
+    User.findOneAndRemove({name: 'Joe'})
+    .then(() => done());
   });
 
-  it('can create a subdocument', () => {
+  it('can create a subdocument', (done) => {
     joe.posts.push(
       {title: 'post title'}
     );
@@ -28,12 +29,12 @@ describe('Subdocuments', () => {
       .then(()=> User.findOne({ name: 'Joe'})
       .then((user) => {
         assert(user.posts[0].title === 'post title');
-        // done(); 
+        done(); 
       }));
     
   });
 
-  it('add post to exist document', () => {
+  it('add post to exist document', (done) => {
     joe.save()
       .then(() => User.findOne({name: 'Joe'}))
       .then((user) => {
@@ -44,12 +45,33 @@ describe('Subdocuments', () => {
       .catch(err => console.log('---------',err))
       .then(()=> User.findOne({ name: 'Joe'}))
       .then((user) => {
-        console.log('+++++++++++++++++', user);
+        // console.log('+++++++++++++++++', user);
         assert(user.posts[0].title === 'New Post');
-        // why need done() ???
-        // done();
+        // why need done() ? to make sure aftereach run correctly ?
+        done();
       })
     
+  });
+
+  it('can remove sub document', (done) => {
+    joe.posts.push(
+      {title: 'post title'}
+    );
+    joe.postCount++;
+    
+    joe.save()
+      .then(() => User.findOne({name: 'Joe'}))
+      .then((user) => {
+        const post = user.posts[0];
+        //
+        post.remove();
+        return user.save();
+      })
+      .then(()=> User.findOne({ name: 'Joe'}))
+      .then((user) => {
+        assert(user.posts.length === 0);
+        done();
+      });
   });
   
 });
