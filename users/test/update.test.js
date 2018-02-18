@@ -9,7 +9,7 @@ describe('Update a user', () => {
   let joe;
 
   beforeEach((done) => {
-    joe = new User({name: 'Joe', postCount: 0});
+    joe = new User({name: 'Joe' });
     joe.save().then(()=>done());
     
   });
@@ -56,12 +56,12 @@ describe('Update a user', () => {
       
   }  );
 
-  it('a user can have post count increment 1', () => {
+  it('a user can have likes increment 1', () => {
     // joe.set('postCount', 1);
-    User.update({name: 'Joe'}, {$inc: {postCount:1} })
+    return User.update({name: 'Joe'}, {$inc: {likes:1} })
       .then(()=> User.findOne({name: 'Joe'}))
       .then((user)=>{
-        expect(user.postCount).to.equal(1);
+        expect(user.likes).to.equal(1);
       })
     ;
   });

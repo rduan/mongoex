@@ -12,7 +12,6 @@ describe('Subdocuments', () => {
     joe = new User({
       name: 'Joe', 
       posts: [],
-      postCount: 0
     });
   });
 
@@ -39,7 +38,6 @@ describe('Subdocuments', () => {
       .then(() => User.findOne({name: 'Joe'}))
       .then((user) => {
         user.posts.push({title: 'New Post'});
-        user.postCount++;
         return user.save();
       })
       .catch(err => console.log('---------',err))
@@ -48,18 +46,18 @@ describe('Subdocuments', () => {
         // console.log('+++++++++++++++++', user);
         assert(user.posts[0].title === 'New Post');
         // why need done() ? to make sure aftereach run correctly ?
+        // or return as test below
         done();
       })
     
   });
 
-  it('can remove sub document', (done) => {
+  it('can remove sub document', () => {
     joe.posts.push(
       {title: 'post title'}
     );
-    joe.postCount++;
     
-    joe.save()
+    return joe.save()
       .then(() => User.findOne({name: 'Joe'}))
       .then((user) => {
         const post = user.posts[0];
@@ -70,7 +68,7 @@ describe('Subdocuments', () => {
       .then(()=> User.findOne({ name: 'Joe'}))
       .then((user) => {
         assert(user.posts.length === 0);
-        done();
+        // done();
       });
   });
   
