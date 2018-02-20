@@ -22,8 +22,17 @@ before((done)=>{
 
 
 beforeEach((done)=>{
-  mongoose.connection.collections.users.drop(() => {
-    done();
-  }
-  );
+  // mongoose name
+  const {users, comments, blogposts } = mongoose.connection.collections;
+  users.drop(()=> {
+    comment.drop(()=>{
+      blogPosts.drop(()=>{
+        done()
+      })
+    })
+  })
+  // mongoose.connection.collections.users.drop(() => {
+  //   done();
+  // }
+  // );
 });

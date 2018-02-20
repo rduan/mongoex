@@ -14,7 +14,11 @@ const UserSchema = new Schema({
     required: [true, 'name schema required']
   },
   posts: [PostSchema],
-  likes: Number
+  likes: Number,
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 }, {
   usePushEach: true 
 });
